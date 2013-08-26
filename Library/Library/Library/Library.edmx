@@ -1,0 +1,783 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LibraryModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="LibraryModelStoreContainer">
+          <EntitySet Name="Acount" EntityType="LibraryModel.Store.Acount" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Author" EntityType="LibraryModel.Store.Author" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Book" EntityType="LibraryModel.Store.Book" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BookAuthors" EntityType="LibraryModel.Store.BookAuthors" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BookSeries" EntityType="LibraryModel.Store.BookSeries" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Category" EntityType="LibraryModel.Store.Category" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Client" EntityType="LibraryModel.Store.Client" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ClientBooks" EntityType="LibraryModel.Store.ClientBooks" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ClientBooksArchive" EntityType="LibraryModel.Store.ClientBooksArchive" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ClientBooksReservation" EntityType="LibraryModel.Store.ClientBooksReservation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Gender" EntityType="LibraryModel.Store.Gender" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Language" EntityType="LibraryModel.Store.Language" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Series" EntityType="LibraryModel.Store.Series" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Status" EntityType="LibraryModel.Store.Status" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="LibraryModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Book_Category" Association="LibraryModel.Store.FK_Book_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Book_Language" Association="LibraryModel.Store.FK_Book_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookAuthors_Author" Association="LibraryModel.Store.FK_BookAuthors_Author">
+            <End Role="Author" EntitySet="Author" />
+            <End Role="BookAuthors" EntitySet="BookAuthors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookAuthors_Book" Association="LibraryModel.Store.FK_BookAuthors_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="BookAuthors" EntitySet="BookAuthors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookSeries_Series" Association="LibraryModel.Store.FK_BookSeries_Series">
+            <End Role="Series" EntitySet="Series" />
+            <End Role="BookSeries" EntitySet="BookSeries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Gender" Association="LibraryModel.Store.FK_Client_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Status" Association="LibraryModel.Store.FK_Client_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientBooks_Book" Association="LibraryModel.Store.FK_ClientBooks_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="ClientBooks" EntitySet="ClientBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientBooks_Client" Association="LibraryModel.Store.FK_ClientBooks_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="ClientBooks" EntitySet="ClientBooks" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Acount">
+          <Key>
+            <PropertyRef Name="AccountName" />
+          </Key>
+          <Property Name="FName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="SName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="LName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="AccountName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="EGN" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Adress" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="AccessLevel" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LName" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InvNum" Type="nchar" Nullable="false" MaxLength="15" />
+          <Property Name="ISBN" Type="nvarchar" MaxLength="50" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Discription" Type="nvarchar" MaxLength="50" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="YearPubl" Type="int" />
+          <Property Name="LanguageID" Type="int" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Rejection" Type="bit" />
+        </EntityType>
+        <EntityType Name="BookAuthors">
+          <Key>
+            <PropertyRef Name="BookID" />
+            <PropertyRef Name="AuthorID" />
+          </Key>
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="AuthorID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookSeries">
+          <Key>
+            <PropertyRef Name="SeriesID" />
+            <PropertyRef Name="BookID" />
+          </Key>
+          <Property Name="SeriesID" Type="int" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="Number" Type="int" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="SName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="EGN" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Adress" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Phone" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="GraduationYear" Type="date" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="GenderID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientBooks">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="BookID" />
+          </Key>
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+          <Property Name="DateLoaned" Type="smalldatetime" Nullable="false" />
+          <Property Name="DateReturned" Type="smalldatetime" Nullable="false" />
+          <Property Name="Returned" Type="bit" />
+          <Property Name="Reservation" Type="bit" />
+        </EntityType>
+        <EntityType Name="ClientBooksArchive">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="BookID" />
+          </Key>
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientBooksReservation">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="BookID" />
+          </Key>
+          <Property Name="ClientID" Type="int" Nullable="false" />
+          <Property Name="BookID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Gender" Type="nchar" Nullable="false" MaxLength="4" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Series">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="nchar" Nullable="false" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Book_Category">
+          <End Role="Category" Type="LibraryModel.Store.Category" Multiplicity="1" />
+          <End Role="Book" Type="LibraryModel.Store.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Book_Language">
+          <End Role="Language" Type="LibraryModel.Store.Language" Multiplicity="1" />
+          <End Role="Book" Type="LibraryModel.Store.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookAuthors_Author">
+          <End Role="Author" Type="LibraryModel.Store.Author" Multiplicity="1" />
+          <End Role="BookAuthors" Type="LibraryModel.Store.BookAuthors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Author">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookAuthors">
+              <PropertyRef Name="AuthorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookAuthors_Book">
+          <End Role="Book" Type="LibraryModel.Store.Book" Multiplicity="1" />
+          <End Role="BookAuthors" Type="LibraryModel.Store.BookAuthors" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookAuthors">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookSeries_Series">
+          <End Role="Series" Type="LibraryModel.Store.Series" Multiplicity="1" />
+          <End Role="BookSeries" Type="LibraryModel.Store.BookSeries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Series">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookSeries">
+              <PropertyRef Name="SeriesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Gender">
+          <End Role="Gender" Type="LibraryModel.Store.Gender" Multiplicity="1" />
+          <End Role="Client" Type="LibraryModel.Store.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Status">
+          <End Role="Status" Type="LibraryModel.Store.Status" Multiplicity="1" />
+          <End Role="Client" Type="LibraryModel.Store.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientBooks_Book">
+          <End Role="Book" Type="LibraryModel.Store.Book" Multiplicity="1" />
+          <End Role="ClientBooks" Type="LibraryModel.Store.ClientBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientBooks">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientBooks_Client">
+          <End Role="Client" Type="LibraryModel.Store.Client" Multiplicity="1" />
+          <End Role="ClientBooks" Type="LibraryModel.Store.ClientBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientBooks">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LibraryModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="LibraryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Acount" EntityType="LibraryModel.Acount" />
+          <EntitySet Name="Author" EntityType="LibraryModel.Author" />
+          <EntitySet Name="Book" EntityType="LibraryModel.Book" />
+          <EntitySet Name="BookSeries" EntityType="LibraryModel.BookSeries" />
+          <EntitySet Name="Category" EntityType="LibraryModel.Category" />
+          <EntitySet Name="Client" EntityType="LibraryModel.Client" />
+          <EntitySet Name="ClientBooks" EntityType="LibraryModel.ClientBooks" />
+          <EntitySet Name="ClientBooksArchive" EntityType="LibraryModel.ClientBooksArchive" />
+          <EntitySet Name="ClientBooksReservation" EntityType="LibraryModel.ClientBooksReservation" />
+          <EntitySet Name="Gender" EntityType="LibraryModel.Gender" />
+          <EntitySet Name="Language" EntityType="LibraryModel.Language" />
+          <EntitySet Name="Series" EntityType="LibraryModel.Series" />
+          <EntitySet Name="Status" EntityType="LibraryModel.Status" />
+          <EntitySet Name="sysdiagrams" EntityType="LibraryModel.sysdiagrams" />
+          <AssociationSet Name="FK_Book_Category" Association="LibraryModel.FK_Book_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Book_Language" Association="LibraryModel.FK_Book_Language">
+            <End Role="Language" EntitySet="Language" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientBooks_Book" Association="LibraryModel.FK_ClientBooks_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="ClientBooks" EntitySet="ClientBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookSeries_Series" Association="LibraryModel.FK_BookSeries_Series">
+            <End Role="Series" EntitySet="Series" />
+            <End Role="BookSeries" EntitySet="BookSeries" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Gender" Association="LibraryModel.FK_Client_Gender">
+            <End Role="Gender" EntitySet="Gender" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Status" Association="LibraryModel.FK_Client_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientBooks_Client" Association="LibraryModel.FK_ClientBooks_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="ClientBooks" EntitySet="ClientBooks" />
+          </AssociationSet>
+          <AssociationSet Name="BookAuthors" Association="LibraryModel.BookAuthors">
+            <End Role="Author" EntitySet="Author" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Acount">
+          <Key>
+            <PropertyRef Name="AccountName" />
+          </Key>
+          <Property Name="FName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="SName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="AccountName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="EGN" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="Adress" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="AccessLevel" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Book" Relationship="LibraryModel.BookAuthors" FromRole="Author" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvNum" Type="String" Nullable="false" MaxLength="15" Unicode="true" FixedLength="true" />
+          <Property Name="ISBN" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CategoryID" Type="Int32" Nullable="false" />
+          <Property Name="YearPubl" Type="Int32" />
+          <Property Name="LanguageID" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Rejection" Type="Boolean" />
+          <NavigationProperty Name="Category" Relationship="LibraryModel.FK_Book_Category" FromRole="Book" ToRole="Category" />
+          <NavigationProperty Name="Language" Relationship="LibraryModel.FK_Book_Language" FromRole="Book" ToRole="Language" />
+          <NavigationProperty Name="ClientBooks" Relationship="LibraryModel.FK_ClientBooks_Book" FromRole="Book" ToRole="ClientBooks" />
+          <NavigationProperty Name="Author" Relationship="LibraryModel.BookAuthors" FromRole="Book" ToRole="Author" />
+        </EntityType>
+        <EntityType Name="BookSeries">
+          <Key>
+            <PropertyRef Name="SeriesID" />
+            <PropertyRef Name="BookID" />
+          </Key>
+          <Property Name="SeriesID" Type="Int32" Nullable="false" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="Int32" />
+          <NavigationProperty Name="Series" Relationship="LibraryModel.FK_BookSeries_Series" FromRole="BookSeries" ToRole="Series" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Book" Relationship="LibraryModel.FK_Book_Category" FromRole="Category" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="SName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="LName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="EGN" Type="String" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <Property Name="Adress" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="GraduationYear" Type="DateTime" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="GenderID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Gender" Relationship="LibraryModel.FK_Client_Gender" FromRole="Client" ToRole="Gender" />
+          <NavigationProperty Name="Status" Relationship="LibraryModel.FK_Client_Status" FromRole="Client" ToRole="Status" />
+          <NavigationProperty Name="ClientBooks" Relationship="LibraryModel.FK_ClientBooks_Client" FromRole="Client" ToRole="ClientBooks" />
+        </EntityType>
+        <EntityType Name="ClientBooks">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="BookID" />
+          </Key>
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+          <Property Name="DateLoaned" Type="DateTime" Nullable="false" />
+          <Property Name="DateReturned" Type="DateTime" Nullable="false" />
+          <Property Name="Returned" Type="Boolean" />
+          <Property Name="Reservation" Type="Boolean" />
+          <NavigationProperty Name="Book" Relationship="LibraryModel.FK_ClientBooks_Book" FromRole="ClientBooks" ToRole="Book" />
+          <NavigationProperty Name="Client" Relationship="LibraryModel.FK_ClientBooks_Client" FromRole="ClientBooks" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="ClientBooksArchive">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="BookID" />
+          </Key>
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientBooksReservation">
+          <Key>
+            <PropertyRef Name="ClientID" />
+            <PropertyRef Name="BookID" />
+          </Key>
+          <Property Name="ClientID" Type="Int32" Nullable="false" />
+          <Property Name="BookID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gender1" Type="String" Nullable="false" MaxLength="4" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Client" Relationship="LibraryModel.FK_Client_Gender" FromRole="Gender" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Book" Relationship="LibraryModel.FK_Book_Language" FromRole="Language" ToRole="Book" />
+        </EntityType>
+        <EntityType Name="Series">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="BookSeries" Relationship="LibraryModel.FK_BookSeries_Series" FromRole="Series" ToRole="BookSeries" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status1" Type="String" Nullable="false" MaxLength="15" Unicode="true" FixedLength="true" />
+          <NavigationProperty Name="Client" Relationship="LibraryModel.FK_Client_Status" FromRole="Status" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Book_Category">
+          <End Role="Category" Type="LibraryModel.Category" Multiplicity="1" />
+          <End Role="Book" Type="LibraryModel.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Book_Language">
+          <End Role="Language" Type="LibraryModel.Language" Multiplicity="1" />
+          <End Role="Book" Type="LibraryModel.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Language">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="LanguageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientBooks_Book">
+          <End Role="Book" Type="LibraryModel.Book" Multiplicity="1" />
+          <End Role="ClientBooks" Type="LibraryModel.ClientBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientBooks">
+              <PropertyRef Name="BookID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookSeries_Series">
+          <End Role="Series" Type="LibraryModel.Series" Multiplicity="1" />
+          <End Role="BookSeries" Type="LibraryModel.BookSeries" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Series">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="BookSeries">
+              <PropertyRef Name="SeriesID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Gender">
+          <End Role="Gender" Type="LibraryModel.Gender" Multiplicity="1" />
+          <End Role="Client" Type="LibraryModel.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Gender">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Status">
+          <End Role="Status" Type="LibraryModel.Status" Multiplicity="1" />
+          <End Role="Client" Type="LibraryModel.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientBooks_Client">
+          <End Role="Client" Type="LibraryModel.Client" Multiplicity="1" />
+          <End Role="ClientBooks" Type="LibraryModel.ClientBooks" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ClientBooks">
+              <PropertyRef Name="ClientID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="BookAuthors">
+          <End Role="Author" Type="LibraryModel.Author" Multiplicity="*" />
+          <End Role="Book" Type="LibraryModel.Book" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LibraryModelStoreContainer" CdmEntityContainer="LibraryEntities">
+          <EntitySetMapping Name="Acount"><EntityTypeMapping TypeName="LibraryModel.Acount"><MappingFragment StoreEntitySet="Acount">
+            <ScalarProperty Name="FName" ColumnName="FName" />
+            <ScalarProperty Name="SName" ColumnName="SName" />
+            <ScalarProperty Name="LName" ColumnName="LName" />
+            <ScalarProperty Name="AccountName" ColumnName="AccountName" />
+            <ScalarProperty Name="Password" ColumnName="Password" />
+            <ScalarProperty Name="EGN" ColumnName="EGN" />
+            <ScalarProperty Name="Adress" ColumnName="Adress" />
+            <ScalarProperty Name="Phone" ColumnName="Phone" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+            <ScalarProperty Name="AccessLevel" ColumnName="AccessLevel" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Author"><EntityTypeMapping TypeName="LibraryModel.Author"><MappingFragment StoreEntitySet="Author">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="FName" ColumnName="FName" />
+            <ScalarProperty Name="LName" ColumnName="LName" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Book"><EntityTypeMapping TypeName="LibraryModel.Book"><MappingFragment StoreEntitySet="Book">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="InvNum" ColumnName="InvNum" />
+            <ScalarProperty Name="ISBN" ColumnName="ISBN" />
+            <ScalarProperty Name="Title" ColumnName="Title" />
+            <ScalarProperty Name="Description" ColumnName="Discription" />
+            <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+            <ScalarProperty Name="YearPubl" ColumnName="YearPubl" />
+            <ScalarProperty Name="LanguageID" ColumnName="LanguageID" />
+            <ScalarProperty Name="Price" ColumnName="Price" />
+            <ScalarProperty Name="Rejection" ColumnName="Rejection" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="BookSeries"><EntityTypeMapping TypeName="LibraryModel.BookSeries"><MappingFragment StoreEntitySet="BookSeries">
+            <ScalarProperty Name="SeriesID" ColumnName="SeriesID" />
+            <ScalarProperty Name="BookID" ColumnName="BookID" />
+            <ScalarProperty Name="Number" ColumnName="Number" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Category"><EntityTypeMapping TypeName="LibraryModel.Category"><MappingFragment StoreEntitySet="Category">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Client"><EntityTypeMapping TypeName="LibraryModel.Client"><MappingFragment StoreEntitySet="Client">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="FName" ColumnName="FName" />
+            <ScalarProperty Name="SName" ColumnName="SName" />
+            <ScalarProperty Name="LName" ColumnName="LName" />
+            <ScalarProperty Name="EGN" ColumnName="EGN" />
+            <ScalarProperty Name="Adress" ColumnName="Adress" />
+            <ScalarProperty Name="Phone" ColumnName="Phone" />
+            <ScalarProperty Name="Email" ColumnName="Email" />
+            <ScalarProperty Name="GraduationYear" ColumnName="GraduationYear" />
+            <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+            <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ClientBooks"><EntityTypeMapping TypeName="LibraryModel.ClientBooks"><MappingFragment StoreEntitySet="ClientBooks">
+            <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+            <ScalarProperty Name="BookID" ColumnName="BookID" />
+            <ScalarProperty Name="DateLoaned" ColumnName="DateLoaned" />
+            <ScalarProperty Name="DateReturned" ColumnName="DateReturned" />
+            <ScalarProperty Name="Returned" ColumnName="Returned" />
+            <ScalarProperty Name="Reservation" ColumnName="Reservation" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ClientBooksArchive"><EntityTypeMapping TypeName="LibraryModel.ClientBooksArchive"><MappingFragment StoreEntitySet="ClientBooksArchive">
+            <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+            <ScalarProperty Name="BookID" ColumnName="BookID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ClientBooksReservation"><EntityTypeMapping TypeName="LibraryModel.ClientBooksReservation"><MappingFragment StoreEntitySet="ClientBooksReservation">
+            <ScalarProperty Name="ClientID" ColumnName="ClientID" />
+            <ScalarProperty Name="BookID" ColumnName="BookID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Gender"><EntityTypeMapping TypeName="LibraryModel.Gender"><MappingFragment StoreEntitySet="Gender">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Gender1" ColumnName="Gender" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Language"><EntityTypeMapping TypeName="LibraryModel.Language"><MappingFragment StoreEntitySet="Language">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Series"><EntityTypeMapping TypeName="LibraryModel.Series"><MappingFragment StoreEntitySet="Series">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Status"><EntityTypeMapping TypeName="LibraryModel.Status"><MappingFragment StoreEntitySet="Status">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Status1" ColumnName="Status" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams"><EntityTypeMapping TypeName="LibraryModel.sysdiagrams"><MappingFragment StoreEntitySet="sysdiagrams">
+            <ScalarProperty Name="name" ColumnName="name" />
+            <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+            <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+            <ScalarProperty Name="version" ColumnName="version" />
+            <ScalarProperty Name="definition" ColumnName="definition" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="BookAuthors" TypeName="LibraryModel.BookAuthors" StoreEntitySet="BookAuthors">
+            <EndProperty Name="Author">
+              <ScalarProperty Name="ID" ColumnName="AuthorID" />
+            </EndProperty>
+            <EndProperty Name="Book">
+              <ScalarProperty Name="ID" ColumnName="BookID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Library">
+        <EntityTypeShape EntityType="LibraryModel.Acount" Width="1.5" PointX="7.75" PointY="2.25" Height="2.941793619791667" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.Author" Width="1.5" PointX="0.75" PointY="3.5" Height="1.787985026041667" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.Book" Width="1.625" PointX="3" PointY="2.5" Height="3.7109993489583317" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.BookSeries" Width="1.5" PointX="8" PointY="7.375" Height="1.7879850260416665" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.Category" Width="1.5" PointX="0.75" PointY="6.375" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.Client" Width="1.5" PointX="3" PointY="9.5" Height="3.7109993489583317" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.ClientBooks" Width="1.5" PointX="5.25" PointY="3.125" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.ClientBooksArchive" Width="1.5" PointX="2.75" PointY="7.25" Height="1.4033821614583317" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.ClientBooksReservation" Width="1.5" PointX="5.75" PointY="10.25" Height="1.4033821614583317" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.Gender" Width="1.5" PointX="0.75" PointY="9.375" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.Language" Width="1.5" PointX="0.75" PointY="0.75" Height="1.5956835937500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.Series" Width="1.5" PointX="5.75" PointY="7.5" Height="1.5956835937500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.Status" Width="1.5" PointX="0.75" PointY="11.75" Height="1.5956835937500031" IsExpanded="true" />
+        <EntityTypeShape EntityType="LibraryModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="10.25" Height="1.9802864583333335" IsExpanded="true" />
+        <AssociationConnector Association="LibraryModel.FK_Book_Category" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="6.78125" />
+          <ConnectorPoint PointX="4.46875" PointY="6.78125" />
+          <ConnectorPoint PointX="4.46875" PointY="6.2109993489583317" />
+        </AssociationConnector>
+        <AssociationConnector Association="LibraryModel.FK_Book_Language" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="1.5478417968750016" />
+          <ConnectorPoint PointX="3.8125" PointY="1.5478417968750016" />
+          <ConnectorPoint PointX="3.8125" PointY="2.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="LibraryModel.FK_ClientBooks_Book" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.625" PointY="4.4035953776041659" />
+          <ConnectorPoint PointX="5.25" PointY="4.4035953776041659" />
+        </AssociationConnector>
+        <AssociationConnector Association="LibraryModel.FK_BookSeries_Series" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.25" PointY="8.2978417968750016" />
+          <ConnectorPoint PointX="8" PointY="8.2978417968750016" />
+        </AssociationConnector>
+        <AssociationConnector Association="LibraryModel.FK_Client_Gender" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="10.235341796875" />
+          <ConnectorPoint PointX="3" PointY="10.235341796875" />
+        </AssociationConnector>
+        <AssociationConnector Association="LibraryModel.FK_Client_Status" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="12.480499674479166" />
+          <ConnectorPoint PointX="3" PointY="12.480499674479166" />
+        </AssociationConnector>
+        <AssociationConnector Association="LibraryModel.FK_ClientBooks_Client" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="12.463440755208332" />
+          <ConnectorPoint PointX="5.46875" PointY="12.463440755208332" />
+          <ConnectorPoint PointX="5.46875" PointY="5.6821907552083317" />
+        </AssociationConnector>
+        <AssociationConnector Association="LibraryModel.BookAuthors" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="4.3939925130208337" />
+          <ConnectorPoint PointX="3" PointY="4.3939925130208337" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>
